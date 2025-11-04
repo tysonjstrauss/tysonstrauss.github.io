@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me • Tyson Strauss</title>
+  <meta name="description" content="The origin story and unique edge of Tyson Strauss, AI Systems Architect.">
+  <style>
+    /* Copied EXACTLY from your index.html to ensure a perfect match */
+    :root{
+      --accent:#6838b3;
+      --accent-light:#8c6fd9;
+      --dark:#5a3b7a;
+      --light:#f8f5ff;
+      --gray:#9c7cc0;
+      --bg:#ffffff;
+      --card-bg:#f6f3ff;
+      --text:#2b1a3a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root{
+        --bg:#1a0f33;
+        --card-bg:#2d1b4d;
+        --text:#e8e1ff;
+        --gray:#b19cd9;
+        --light:#2d1b4d;
+      }
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;min-height:100vh;
+      font-family:'JetBrains Mono','Consolas','Courier New',monospace;
+      background:var(--bg);color:var(--text);
+      line-height:1.7;transition:background .3s,color .3s;
+      font-size:16px;
+    }
+
+    /* PAGE CENTERING */
+    .page-center{display:flex;flex-direction:column;align-items:center;
+                justify-content:flex-start;min-height:100vh;padding:2rem 1rem;}
+    .content{max-width:900px;width:100%;display:flex;flex-direction:column;align-items:center;}
+
+    /* HEADER */
+    header{position:sticky;top:0;background:var(--bg);
+            border-bottom:3px solid var(--accent);padding:.75rem 1rem;
+            display:flex;justify-content:space-between;align-items:center;
+            z-index:10;box-shadow:0 2px 10px rgba(104,56,179,.1);
+            max-width:900px;width:100%;}
+    .logo{font-weight:900;font-size:1.5rem;color:var(--accent);letter-spacing:-.5px;}
+    nav a{margin-left:1.8rem;color:var(--gray);text-decoration:none;
+          font-weight:600;transition:color .2s;}
+    nav a:hover{color:var(--accent-light)}
+    
+    /* Active link style for "About Me" */
+    nav a.active{color:var(--accent-light);font-weight:700;}
+
+
+    /* HERO (Slightly modified for the About page) */
+    .hero{padding:4rem 1rem 3rem;text-align:center;width:100%;}
+    .hero h1{font-size:2.8rem;margin:0 0 .5rem;
+              background:linear-gradient(90deg,var(--accent),var(--accent-light));
+              -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .hero p{font-size:1.25rem;color:var(--gray);max-width:700px;margin:1rem auto;}
+    .btn{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-light));
+         color:#fff;padding:.9rem 2rem;border-radius:50px;font-weight:600;
+         margin-top:1rem;text-decoration:none;
+         box-shadow:0 4px 15px rgba(104,56,179,.3);
+         transition:transform .2s,box-shadow .2s;}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(104,56,179,.4);}
+
+    /* SECTIONS */
+    section{width:100%;margin:3rem 0;text-align:center;}
+    h2{font-size:2rem;margin-bottom:.8rem;position:relative;display:inline-block;}
+    h2::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+              width:60%;height:4px;background:linear-gradient(90deg,var(--accent),transparent);
+              border-radius:2px;}
+
+    /* This is the new 2-column grid for the About page content */
+    .about-grid{
+      display: grid;
+      grid-template-columns: 1fr; /* Single column on mobile */
+      gap: 2.5rem;
+      margin-top: 2rem;
+      width: 100%;
+    }
+    
+    /* Two columns on desktop */
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: 3fr 2fr; /* 60% text, 40% photo/facts */
+        align-items: flex-start;
+      }
+    }
+
+
+    /* CARD STYLE (for the left column text) */
+    .card{background:var(--card-bg);border:1px solid rgba(104,56,179,.15);
+          border-radius:12px;padding:2.2rem;box-shadow:0 4px 20px rgba(104,56,179,.06);
+          text-align: left; /* Text aligned left */
+    }
+    
+    /* ABOUT CARD TITLE */
+    .card h3{margin:0 0 1.5rem;font-size:2rem !important;font-weight:900 !important;
+             color:#000 !important;line-height:1.2;letter-spacing:-.5px;}
+
+    /* Dark mode override for card titles */
+    @media (prefers-color-scheme: dark) {
+      .card h3{color:var(--text) !important;}
+    }
+
+    /* ABOUT CARD TEXT */
+    .card p{font-style:normal;color:var(--text);margin-bottom:1.5rem;
+            font-size: 1rem; line-height: 1.8;}
+    
+    
+    /* RIGHT COLUMN STYLES (for photo and facts) */
+    .sticky-sidebar {
+      position: sticky;
+      top: 100px; /* Aligns with bottom of header */
+    }
+    
+    .sticky-sidebar img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(104,56,179,.12);
+      margin-bottom: 2.5rem;
+      border: 1px solid rgba(104,56,179,.15);
+    }
+    
+    .facts-box {
+      background:var(--card-bg);border:1px solid rgba(104,56,179,.15);
+      border-radius:12px;padding:2rem;box-shadow:0 4px 20px rgba(104,56,179,.06);
+      text-align: left;
+    }
+    .facts-box h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 1.5rem;
+      color: var(--text);
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .facts-box dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+    }
+    .facts-box dt {
+      font-weight: 600;
+      color: var(--gray);
+    }
+    .facts-box dd {
+      color: var(--text);
+      text-align: right;
+      font-weight: 600;
+    }
+
+
+    footer{background:var(--dark);color:#e8e1ff;text-align:center;padding:2rem;
+           font-size:.9rem;width:100%;margin-top:auto;}
+
+    @media (max-width:768px){
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .sticky-sidebar {
+        position: relative;
+        top: 0;
+      }
+    }
+
+    @media (max-width:640px){
+      .hero h1{font-size:2.2rem}
+      .hero p{font-size:1.1rem}
+      header{padding:.5rem 1rem;}
+      .logo{font-size:1.25rem;}
+      nav{display:none} /* Hides nav on mobile */
+      .card{padding:1.8rem}
+      .card h3{font-size:1.8rem !important;}
+      .facts-box{padding: 1.8rem;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-center">
+  <div class="content">
+
+    <header>
+      <div class="logo">Tyson Strauss</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About Me</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>My Origin & My Edge</h1>
+      <p style="font-size: 1.1rem; color: var(--gray);">The "why" behind my work and the "what" that defines my skills.</p>
+      <a href="index.html#contact" class="btn">Let's build something</a>
+    </section>
+
+    <section id="about-content">
+      <div class="about-grid">
+
+        <div class="card">
+          <div>
+            <h3>🧭 My Origin: Logic Born of Necessity</h3>
+            <p>
+              I have discovered a deep passion and love for the work I do, and the opportunities it promises for the future. The reason I have adapted so quickly to the complexities of these projects is that, in a way, I have been doing it my whole life.
+            </p>
+            <p>
+              I struggled with High-Functioning Autism as a child, which caused incompatible social existences and left me feeling like I had a different form of existence. Instead of giving up, I ran extensive diagnostics on my own functions and reasoning to understand my own framework. I utilized that knowledge to establish guides and protocols within myself, learning how to seamlessly integrate into society with minimal to no conflict or errors.
+            </sppan>
+            <p>
+              This natural existence, which falls halfway between systems and people, makes me uniquely qualified to find new ways to connect both sides together more efficiently.
+            </p>
+          </div>
+        
+          <div style="margin-top: 2.5rem;">
+            <h3>💥 My Unique Edge: Evolving AI Systems</h3>
+            <p>
+              I use my own integrated intelligence and cognitive synthesis to discover and conceptualize fresh and sometimes unconventional approaches to problems that yield impressive results.
+            </sppan>
+            <p>
+              LLM AI systems are far more complex than their surface suggests, and therefore require a deeply unique and sophisticated approach to foster the best performance from them. My work involves diving deep into their internal systems and behaviors to develop a unique understanding of their operations. This expertise has led to pioneering fresh, strategic techniques that have resulted in immediate and noticeable improvements across all functions.
+            </sppan>
+          </div>
+        </div>
+
+        <div class="sticky-sidebar">
+          <img src="https://iili.io/KQ5GQeV.md.jpg" alt="Tyson J Strauss – longer portrait">
+          
+          <div class="facts-box">
+            <h3>Quick Facts</h3>
+            <dl>
+              <dt>Location</dt>
+              <dd>Saskatoon, SK</dd>
+              
+              <dt>Availability</dt>
+              <dd>Remote-Ready</dd>
+              
+              <dt>My "Why"</dt>
+              <dd>Logic Born of Necessity</dd>
+              
+              <dt>My Edge</dt>
+              <dd>Evolving AI Systems</dd>
+              
+              <dt>Core Skill</dt>
+              <dd>System Architecture</dd>
+              
+              <dt>Methodology</dt>
+              <dd>Diagnose &rarr; Architect</dd>
+            </dl>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Get in Touch</h2>
+      <p>I’m looking for AI/ML platform roles, MLOps consulting, or open-source collaboration.</p>
+      <p>
+        <a href="mailto:TysonJStrauss@gmail.com" style="color:var(--accent)">TysonJStrauss@gmail.com</a> |
+        <a href="https://www.linkedin.com/in/tyson-strauss-732b58254/" style="color:var(--accent)">LinkedIn</a> |
+        <a href="https://github.com/tysonjstrauss" style="color:var(--accent)">GitHub</a>
+      </sppan>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  © 2025 Tyson Strauss – Built with zero bloat.
+</footer>
+
+</body>
+</html> 
